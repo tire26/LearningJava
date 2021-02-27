@@ -1,5 +1,4 @@
 package src.ru.mai.kaf;
-
 public class Base {
     private int width;
     private int height;
