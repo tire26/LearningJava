@@ -4,33 +4,43 @@ import java.util.Scanner;
 
 public class lr2 {
     public static void main(String[] args) {
-        Scanner inPut;
-        int numOfEntries = 0, i, middleSize = 0;
+        Scanner in;
+        int numOfEntries = 0, i, middleSize = 0, check = 0;
         String[] str;
         int[] stringsSize;
         System.out.println("Entere count of strings");
-        inPut = new Scanner(System.in);
-        try {// здесь проверяется исключение попадания символа в переменную типа int
-        numOfEntries = inPut.nextInt(); 
-    } catch (java.util.InputMismatchException e) {//вывод 
-        System.out.println("Was entered not a number");
-    }
-    str = new String[numOfEntries];      //обЪявление 
-    stringsSize = new int [numOfEntries];//2 массивов
-    for (i = 0; i < numOfEntries; i++) {//ввод строк и подсчёт их средней длины
-        System.out.println("Entere string " + (i + 1) + ":");
-        inPut = new Scanner(System.in);
-        str[i] = inPut.nextLine();
-        stringsSize[i] = str[i].length();
-        middleSize += str[i].length();  
-    }
-    inPut.close();
-    middleSize /= numOfEntries;
-    System.out.println("middle length:" + middleSize);
-    for (i = 0; i < numOfEntries; i++){//вывод строк, длинна которых меньше либо равна средней
-        if (str[i].length() <= middleSize){
-            System.out.println(str[i] + " | length:" + stringsSize[i]);
+        do { // ввод строки и проверка, на её состав, если только цифры, то check становится = 1, и программа идёт дальше, иначе ввод до тех пор, пока не будт числа
+            in = new Scanner(System.in);
+            if (in.hasNextInt()) {
+                numOfEntries = in.nextInt();
+                System.out.println("Was entered number:" + numOfEntries);
+                check = 1;
+            }
+
+            else {
+                System.out.print("Was entered not a number, try again: ");
+            }
+        } while (check == 0);
+        str = new String[numOfEntries];
+        stringsSize = new int[numOfEntries];
+
+        for (i = 0; i < numOfEntries; i++) { // ввод строк и подсчёт их средней длины
+            System.out.println("Entere string " + (i + 1) + ":");
+            in = new Scanner(System.in);
+                str[i] = in.nextLine();
+                stringsSize[i] = str[i].length();
+                middleSize += str[i].length();
+        }
+
+        in.close();
+        middleSize /= numOfEntries;
+        System.out.println("middle length:" + middleSize);
+
+        for (i = 0; i < numOfEntries; i++) { // вывод строк, длинна которых меньше либо равна средней
+
+            if (str[i].length() <= middleSize) {
+                System.out.println(str[i] + " | length:" + stringsSize[i]);
+            }
         }
     }
-}
 }
