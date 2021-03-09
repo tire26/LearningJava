@@ -2,7 +2,7 @@ package lr.lrOne;
 
 import java.util.Scanner;
 
-public class lr1 {
+public class LrFirst {
     public static void main(String[] args) {
         String str;
         Scanner inPut;
