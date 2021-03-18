@@ -1,4 +1,4 @@
-package classWork;
+package classWork.lesson28;
 
 public class Cat extends Animal {
 

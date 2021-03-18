@@ -1,4 +1,4 @@
-package classWork;
+package classWork.lesson28;
 
 public abstract class Animal implements Sound, MeanOfTransport {
 

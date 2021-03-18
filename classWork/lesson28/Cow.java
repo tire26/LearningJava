@@ -1,4 +1,4 @@
-package classWork;
+package classWork.lesson28;
 
 public class Cow implements Sound {
     
