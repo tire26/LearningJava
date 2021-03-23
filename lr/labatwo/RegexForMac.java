@@ -2,13 +2,16 @@ package lr.labatwo;
 
 import java.util.Scanner;
 
-public class RegexPassword {
+public class RegexForMac {
+    
     public static void main(String[] args) {
+        
         String txt;
-        System.out.println("enter password");
+        System.out.println("enter MAC");
         Scanner input = new Scanner(System.in);
         txt = input.nextLine();
-        System.out.println(txt.matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(_*).{8,}"));
+        System.out.println(txt.matches("^((\\d|[A-F]){2}"
+                + "(:|-)){5}(\\d|[A-F]){2}$"));
         input.close();
     }
 }
