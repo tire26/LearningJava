@@ -1,4 +1,4 @@
-package lr.lrOne;
+package lr.labaone.lrOne;
 
 import java.util.Scanner;
 
