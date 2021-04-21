@@ -75,12 +75,14 @@ public class Inflation {
             inflations[i] = enterDouble(scanner);
             totalIflation += inflations[i];
             totalCoast = calculation(totalCoast, totalIflation);
-        }
-        if (totalCoast <= 0) {
+            if (totalCoast <= 0) {
 
-            totalCoast = 0.0;
-            System.out.println("Economic crash");
+                totalCoast = 0.0;
+                System.out.println("Economic crash");
+                Runtime.getRuntime().exit(0);
+            }
         }
+        
         System.out.format("%.2f", totalCoast);
     }
 }

@@ -9,11 +9,11 @@ public class WeightedArithmeticMean {
         int number = 0;
         boolean check = false;
 
-        while (!check) {
+        do {
 
             if (scanner.hasNextInt()) {
 
-                number = Integer.parseInt(scanner.nextLine());
+                number = scanner.nextInt();
                 check = true;
             } else {
 
@@ -21,74 +21,59 @@ public class WeightedArithmeticMean {
                 scanner.nextLine();
                 check = false;
             }
-        }
+        } while (!check);
         return number;
     }
 
     public static void main(String[] args) {
 
-        final byte positionNumInStrings = 3;
+        final int positionNumInStrings = 3;
         Scanner scanner = new Scanner(System.in);
         int countOfMeans = 0;
-        Double[] weightsOfValues, values;
+        double[] weightsOfValues, values;
         double topSum = 0, bottomSum = 0;
-        String correctInput = "^(x: ([1-9]?[0-9]+)(.[0-9]*[1-9])?; p: ([1-9]?[0-9]+)(.[0-9]*[1-9])?)"
-                + "|(x: ([1-9]?[0-9]*)(.[0-9]*[1-9])?)"
-                + "|(p: ([1-9]?[0-9]+)(.[0-9]*[1-9])?; x: ([1-9]?[0-9]+)(.[0-9]*[1-9])?)$", buffer, currentP, currentX;
-        char[][] separateInput;
-        String[] XAndPStrings; // Массив двух строк для x и p
+        String correctInput = "^(x: (-?[0-9]+(\\.[0-9]*[1-9]{1})?); p: (-?[0-9]+(\\.[0-9]*[1-9]{1})?))"
+                + "|(x: (-?[0-9]+(\\.[0-9]*[1-9]{1})?))"
+                + "|(p: (-?[0-9]+(\\.[0-9]*[1-9]{1})?); x: (-?[0-9]+(\\.[0-9]*[1-9]{1})?))$";
         boolean check = false;
-        StringBuilder currentNumberX = new StringBuilder(), currentNumberP = new StringBuilder();
 
         System.out.print("Enter count of number: ");
         countOfMeans = enterInteger(scanner);
-        values = new Double[countOfMeans];
-        weightsOfValues = new Double[countOfMeans];
-        separateInput = new char[countOfMeans][];
+        values = new double[countOfMeans];
+        weightsOfValues = new double[countOfMeans];
 
         System.out.println("Enter your values");
         for (int i = 0; i < countOfMeans; ++i) { // ввод значений
+
             check = false;
-            while (!check) {
+            do {
 
-                buffer = scanner.nextLine();
-                if (buffer.matches(correctInput)) { 
+                String buffer = scanner.nextLine();
+                if (buffer.matches(correctInput)) {
 
+                    String[] xAndPStrings; // Массив двух строк для x и p
                     check = true;
-                    XAndPStrings = buffer.split("(; )");
-                    for (int j = 0; j < XAndPStrings.length; ++j) { // разбивание строки значения на 2 строки
+                    xAndPStrings = buffer.split("; ");
+                    for (int j = 0; j < xAndPStrings.length; ++j) { // разбивание строки значения на 2 строки
+                        if (xAndPStrings[j].contains("x")) { // если текущая строка - значения
 
-                        separateInput[i] = XAndPStrings[j].toCharArray();
-                        currentNumberX.delete(0, currentNumberX.length());
-                        currentNumberP.delete(0, currentNumberP.length());
-                        for (int k = 0; k < separateInput[i].length; ++k) { // проход по массиву символов обоих строк
+                            String currentX = xAndPStrings[j].substring(positionNumInStrings);
+                            try {
 
-                            if (separateInput[i][k] == 'x') { // если текущая строка  - значения
-
-                                
-                                for (int k2 = positionNumInStrings; k2 < separateInput[i].length; ++k2, ++k) { // считывание числа из массива строк
-                                    
-                                    currentNumberX.append(separateInput[i][k2]);
-                                }
-                                currentX = currentNumberX.toString();
-                                try{
                                 values[i] = Double.parseDouble(currentX);
-                                } catch (NumberFormatException e) {
-                                    System.out.println("Programm crashed");
-                                }
-                            } else if (separateInput[i][k] == 'p') {  // если текущая строка  - вес значения
+                            } catch (NumberFormatException e) {
 
-                                
-                                for (int k2 = positionNumInStrings; k2 < separateInput[i].length; ++k2, ++k) { // считывание числа из массива строк
+                                System.out.println("Programm crashed");
+                            }
+                        } else if (xAndPStrings[j].contains("p")) { // если текущая строка - вес значения
 
-                                    currentNumberP.append(separateInput[i][k2]);
-                                }
-                                currentP = currentNumberP.toString();
-                                try {
+                            String currentP = xAndPStrings[j].substring(positionNumInStrings);
+                            try {
+
                                 weightsOfValues[i] = Double.parseDouble(currentP);
-                                } catch (NumberFormatException e) {
-                                    System.out.println("Programm crashed");
-                                }
+                            } catch (NumberFormatException e) {
+
+                                System.out.println("Programm crashed");
                             }
                         }
                     }
@@ -97,15 +82,15 @@ public class WeightedArithmeticMean {
                     System.out.println("Was entered wrong form, try again:");
                     check = false;
                 }
-            }
+            } while (!check);
         }
         for (int i = 0; i < countOfMeans; ++i) {
-            if (weightsOfValues[i] == null) {
+            if (weightsOfValues[i] == 0) {
                 weightsOfValues[i] = 1.0;
             }
             topSum += weightsOfValues[i] * values[i];
             bottomSum += weightsOfValues[i];
         }
-        System.out.format("%.3f",topSum / bottomSum);
+        System.out.format("%.3f", topSum / bottomSum);
     }
 }

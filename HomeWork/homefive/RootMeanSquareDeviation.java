@@ -1,11 +1,10 @@
 package homework.homefive;
 
 import java.util.Scanner;
-import java.lang.Math;
 
 public class RootMeanSquareDeviation {
     
-    public static Double enterDouble(Scanner scanner) {
+    public static double enterDouble(Scanner scanner) {
         double checkNumber = 0.0;
         boolean check = false;
 
@@ -49,16 +48,16 @@ public class RootMeanSquareDeviation {
         
         Scanner scanner = new Scanner(System.in);
         int countOfnumber = 0;
-        Double[] numbers;
+        double[] numbers;
         double rootMeanSquareDeviation = 0, middleValue = 0;
         
         System.out.print("Enter count of number: ");
         countOfnumber = enterInteger(scanner);
-        numbers = new Double[countOfnumber];
+        numbers = new double[countOfnumber];
 
 
         System.out.println("Enter numbers");
-        for(int i = 0; i < countOfnumber; ++i) {
+        for (int i = 0; i < countOfnumber; ++i) {
 
             numbers[i] =  enterDouble(scanner);
             middleValue += numbers[i];
@@ -69,8 +68,7 @@ public class RootMeanSquareDeviation {
             
             rootMeanSquareDeviation += Math.pow(numbers[i] - middleValue, 2); 
         }
-        rootMeanSquareDeviation /= countOfnumber;
-        rootMeanSquareDeviation = Math.sqrt(rootMeanSquareDeviation);
+        rootMeanSquareDeviation = Math.sqrt(rootMeanSquareDeviation / countOfnumber);
         System.out.format("%.3f", rootMeanSquareDeviation);
     }
 }

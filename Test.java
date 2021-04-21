@@ -1,63 +1,32 @@
 
-import java.util.Scanner;
-
-class Box {
-    double width;
-    double height;
-    double depth;
-}
-
-
+import java.util.*;
 
 public class Test {
 
-    public static int enterInteger(Scanner scanner) {
-
-        int number = 0;
-        boolean check = false;
-    
-        while (!check) {
-    
-            if (scanner.hasNextInt()) {
-    
-                number = scanner.nextInt();
-                check = true;
-            } else {
-    
-                System.out.println("Was entered not a number, try again: ");
-                scanner.nextLine();
-                check = false;
-            }
-        }
-        return number;
-    }
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        StringBuilder sum = new StringBuilder("adasdasdasd");
-        String b, c;
-        int a = 0;
-        double sum1 = 0;
-        boolean check = false;
 
-        // b = scanner.nextLine();
-        // sum1 = Double.parseDouble(b);
-        // System.out.println(sum1);
-        a = enterInteger(scanner);
+        int[] a = new int[] {1, 2, 3, 4, 5, 6};
+        int[] a2 = new int[] {0, 0, 0, 0};
+        int[] b = new int[3];
+        int[] c = new int[3];
 
-        b = scanner.nextLine();
-    //     while (!check) {
+        System.arraycopy(a, 0, b, 0, 3);
+        System.arraycopy(a, 3, c, 0, 3);
+//        for (int s : b) {
+//
+//            System.out.println(s);
+//        }
+//        for (int s : c) {
+//
+//            System.out.println(s);
+//        }
+        a = new int[7];
+        System.arraycopy(b, 0, a, 0, 3);
+        a[4] = 0;
+        System.arraycopy(c, 0, a, 4, 3);
+        for (int s : a) {
 
-    //         if (scanner.hasNextDouble()) {
-
-    //             sum1 = Double.parseDouble(scanner.nextLine());
-    //             check = true;
-    //         } else {
-
-    //             System.out.println("Was entered not a number, try again: ");
-    //             scanner.nextDouble();
-    //             check = false;
-    //         }
-    //     }
-
+            System.out.println(s);
+        }
     }
 }
